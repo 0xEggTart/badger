@@ -32,13 +32,16 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
-	otrace "go.opencensus.io/trace"
+	"go.opentelemetry.io/otel/trace"
+
 
 	"github.com/dgraph-io/badger/v4/pb"
 	"github.com/dgraph-io/badger/v4/table"
 	"github.com/dgraph-io/badger/v4/y"
 	"github.com/dgraph-io/ristretto/v2/z"
 )
+
+var tracer = otel.Tracer("example-tracer")
 
 type levelsController struct {
 	nextFileID atomic.Uint64
@@ -323,7 +326,7 @@ func (s *levelsController) dropPrefixes(prefixes [][]byte) error {
 		if len(tableGroups) == 0 {
 			continue
 		}
-		_, span := otrace.StartSpan(context.Background(), "Badger.Compaction")
+		_, span := tracer.Start(context.Background(), "Badger.Compaction")
 		span.Annotatef(nil, "Compaction level: %v", l.level)
 		span.Annotatef(nil, "Drop Prefixes: %v", prefixes)
 		defer span.End()
@@ -1036,7 +1039,7 @@ func containsAnyPrefixes(table *table.Table, listOfPrefixes [][]byte) bool {
 }
 
 type compactDef struct {
-	span *otrace.Span
+	span *tracer.Span
 
 	compactorId int
 	t           targets
@@ -1523,7 +1526,7 @@ func (s *levelsController) doCompact(id int, p compactionPriority) error {
 		p.t = s.levelTargets()
 	}
 
-	_, span := otrace.StartSpan(context.Background(), "Badger.Compaction")
+	_, span := tracer.Start(context.Background(), "Badger.Compaction")
 	defer span.End()
 
 	cd := compactDef{

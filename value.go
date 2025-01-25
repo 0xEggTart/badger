@@ -33,11 +33,14 @@ import (
 	"sync/atomic"
 
 	"github.com/pkg/errors"
-	otrace "go.opencensus.io/trace"
+	"go.opentelemetry.io/otel/trace"
+
 
 	"github.com/dgraph-io/badger/v4/y"
 	"github.com/dgraph-io/ristretto/v2/z"
 )
+
+var tracer = otel.Tracer("example-tracer")
 
 // maxVlogFileSize is the maximum size of the vlog file which can be created. Vlog Offset is of
 // uint32, so limiting at max uint32.
@@ -1063,7 +1066,7 @@ func discardEntry(e Entry, vs y.ValueStruct, db *DB) bool {
 }
 
 func (vlog *valueLog) doRunGC(lf *logFile) error {
-	_, span := otrace.StartSpan(context.Background(), "Badger.GC")
+	_, span := tracer.Start(context.Background(), "Badger.GC")
 	span.Annotatef(nil, "GC rewrite for: %v", lf.path)
 	defer span.End()
 	if err := vlog.rewrite(lf); err != nil {
