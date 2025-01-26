@@ -18,7 +18,7 @@ package badger
 
 import (
 	"bytes"
-	"context"
+	//"context"
 	"encoding/hex"
 	stderrors "errors"
 	"fmt"
@@ -32,7 +32,8 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
-	"go.opentelemetry.io/otel/trace"
+	//"go.opentelemetry.io/otel"
+	//"go.opentelemetry.io/otel/trace"
 
 
 	"github.com/dgraph-io/badger/v4/pb"
@@ -41,7 +42,7 @@ import (
 	"github.com/dgraph-io/ristretto/v2/z"
 )
 
-var tracer = otel.Tracer("example-tracer")
+//var tracer2 = otel.Tracer("example-tracer")
 
 type levelsController struct {
 	nextFileID atomic.Uint64
@@ -326,14 +327,14 @@ func (s *levelsController) dropPrefixes(prefixes [][]byte) error {
 		if len(tableGroups) == 0 {
 			continue
 		}
-		_, span := tracer.Start(context.Background(), "Badger.Compaction")
-		span.Annotatef(nil, "Compaction level: %v", l.level)
-		span.Annotatef(nil, "Drop Prefixes: %v", prefixes)
-		defer span.End()
+		//_, span := tracer2.Start(context.Background(), "Badger.Compaction")
+		//span.SetAttributes(attribute.String(nil, "Compaction level: %v", l.level))
+		//span.SetAttributes(attribute.String(nil, "Drop Prefixes: %v", prefixes))
+		//defer span.End()
 		opt.Infof("Dropping prefix at level %d (%d tableGroups)", l.level, len(tableGroups))
 		for _, operation := range tableGroups {
 			cd := compactDef{
-				span:         span,
+		//		span:         span,
 				thisLevel:    l,
 				nextLevel:    l,
 				top:          nil,
@@ -885,8 +886,8 @@ func (s *levelsController) compactBuildTables(
 	y.NumCompactionTablesAdd(s.kv.opt.MetricsEnabled, numTables)
 	defer y.NumCompactionTablesAdd(s.kv.opt.MetricsEnabled, -numTables)
 
-	cd.span.Annotatef(nil, "Top tables count: %v Bottom tables count: %v",
-		len(topTables), len(botTables))
+	//cd.span.SetAttributes(attribute.String((nil, "Top tables count: %v Bottom tables count: %v",
+	//	len(topTables), len(botTables)))
 
 	keepTable := func(t *table.Table) bool {
 		for _, prefix := range cd.dropPrefixes {
@@ -1039,7 +1040,7 @@ func containsAnyPrefixes(table *table.Table, listOfPrefixes [][]byte) bool {
 }
 
 type compactDef struct {
-	span *tracer.Span
+	//span *tracer2.Span
 
 	compactorId int
 	t           targets
@@ -1526,12 +1527,12 @@ func (s *levelsController) doCompact(id int, p compactionPriority) error {
 		p.t = s.levelTargets()
 	}
 
-	_, span := tracer.Start(context.Background(), "Badger.Compaction")
-	defer span.End()
+	//_, span := tracer2.Start(context.Background(), "Badger.Compaction")
+	//defer span.End()
 
 	cd := compactDef{
 		compactorId:  id,
-		span:         span,
+	//	span:         span,
 		p:            p,
 		t:            p.t,
 		thisLevel:    s.levels[l],
@@ -1557,7 +1558,7 @@ func (s *levelsController) doCompact(id int, p compactionPriority) error {
 	}
 	defer s.cstatus.delete(cd) // Remove the ranges from compaction status.
 
-	span.Annotatef(nil, "Compaction: %+v", cd)
+	//span.SetAttributes(attribute.String(nil, "Compaction: %+v", cd))
 	if err := s.runCompactDef(id, l, cd); err != nil {
 		// This compaction couldn't be done successfully.
 		s.kv.opt.Warningf("[Compactor: %d] LOG Compact FAILED with error: %+v: %+v", id, err, cd)

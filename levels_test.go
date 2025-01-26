@@ -1226,7 +1226,7 @@ func TestFillTableCleanup(t *testing.T) {
 
 		cd := compactDef{
 			compactorId: 0,
-			span:        nil,
+			//span:        nil,
 			p:           prio,
 			t:           prio.t,
 			thisLevel:   db.lc.levels[level-1],
