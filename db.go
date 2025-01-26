@@ -35,12 +35,12 @@ import (
 	humanize "github.com/dustin/go-humanize"
 	"github.com/pkg/errors"
 
-	"github.com/dgraph-io/badger/v4/fb"
-	"github.com/dgraph-io/badger/v4/options"
-	"github.com/dgraph-io/badger/v4/pb"
-	"github.com/dgraph-io/badger/v4/skl"
-	"github.com/dgraph-io/badger/v4/table"
-	"github.com/dgraph-io/badger/v4/y"
+	"github.com/0xEggTart/badger/fb"
+	"github.com/0xEggTart/badger/options"
+	"github.com/0xEggTart/badger/pb"
+	"github.com/0xEggTart/badger/skl"
+	"github.com/0xEggTart/badger/table"
+	"github.com/0xEggTart/badger/y"
 	"github.com/dgraph-io/ristretto/v2"
 	"github.com/dgraph-io/ristretto/v2/z"
 )

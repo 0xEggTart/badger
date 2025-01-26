@@ -13,7 +13,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/dgraph-io/badger/v4/y"
+	"github.com/0xEggTart/badger/y"
 	"github.com/dgraph-io/ristretto/v2/z"
 )
 

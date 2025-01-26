@@ -33,11 +33,10 @@ import (
 	"sync/atomic"
 
 	"github.com/pkg/errors"
-//	"go.opentelemetry.io/otel"
-//	"go.opentelemetry.io/otel/trace"
+	//	"go.opentelemetry.io/otel"
+	//	"go.opentelemetry.io/otel/trace"
 
-
-	"github.com/dgraph-io/badger/v4/y"
+	"github.com/0xEggTart/badger/y"
 	"github.com/dgraph-io/ristretto/v2/z"
 )
 

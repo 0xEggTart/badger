@@ -24,7 +24,7 @@ import (
 
 	"github.com/dustin/go-humanize"
 
-	"github.com/dgraph-io/badger/v4/badger/cmd"
+	"github.com/0xEggTart/badger/badger/cmd"
 	"github.com/dgraph-io/ristretto/v2/z"
 )
 

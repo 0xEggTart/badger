@@ -24,7 +24,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/dgraph-io/badger/v4"
+	"github.com/0xEggTart/badger"
 )
 
 var restoreFile string

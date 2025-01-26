@@ -23,8 +23,8 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/dgraph-io/badger/v4"
-	"github.com/dgraph-io/badger/v4/options"
+	"github.com/0xEggTart/badger"
+	"github.com/0xEggTart/badger/options"
 )
 
 var flattenCmd = &cobra.Command{

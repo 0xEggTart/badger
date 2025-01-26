@@ -29,13 +29,11 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-
-	"github.com/dgraph-io/badger/v4/options"
-	"github.com/dgraph-io/badger/v4/pb"
-	"github.com/dgraph-io/badger/v4/table"
-	"github.com/dgraph-io/badger/v4/y"
+	"github.com/0xEggTart/badger/options"
+	"github.com/0xEggTart/badger/pb"
+	"github.com/0xEggTart/badger/table"
+	"github.com/0xEggTart/badger/y"
 )
-
 
 func TestManifestBasic(t *testing.T) {
 	dir, err := os.MkdirTemp("", "badger-test")
@@ -183,8 +181,8 @@ func TestOverlappingKeyRangeError(t *testing.T) {
 	cd := compactDef{
 		thisLevel: lh0,
 		nextLevel: lh1,
-	//	span:      span,
-		t:         kv.lc.levelTargets(),
+		//	span:      span,
+		t: kv.lc.levelTargets(),
 	}
 	cd.t.baseLevel = 1
 
@@ -206,8 +204,8 @@ func TestOverlappingKeyRangeError(t *testing.T) {
 	cd = compactDef{
 		thisLevel: lh0,
 		nextLevel: lh1,
-	//	span:      span,
-		t:         kv.lc.levelTargets(),
+		//	span:      span,
+		t: kv.lc.levelTargets(),
 	}
 	cd.t.baseLevel = 1
 	lc.fillTablesL0(&cd)

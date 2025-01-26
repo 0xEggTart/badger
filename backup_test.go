@@ -29,7 +29,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/dgraph-io/badger/v4/pb"
+	"github.com/0xEggTart/badger/pb"
 )
 
 func TestBackupRestore1(t *testing.T) {

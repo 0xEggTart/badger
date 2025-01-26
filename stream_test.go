@@ -28,8 +28,8 @@ import (
 	"github.com/stretchr/testify/require"
 	"google.golang.org/protobuf/proto"
 
-	bpb "github.com/dgraph-io/badger/v4/pb"
-	"github.com/dgraph-io/badger/v4/y"
+	bpb "github.com/0xEggTart/badger/pb"
+	"github.com/0xEggTart/badger/y"
 	"github.com/dgraph-io/ristretto/v2/z"
 )
 

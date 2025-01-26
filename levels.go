@@ -35,10 +35,9 @@ import (
 	//"go.opentelemetry.io/otel"
 	//"go.opentelemetry.io/otel/trace"
 
-
-	"github.com/dgraph-io/badger/v4/pb"
-	"github.com/dgraph-io/badger/v4/table"
-	"github.com/dgraph-io/badger/v4/y"
+	"github.com/0xEggTart/badger/pb"
+	"github.com/0xEggTart/badger/table"
+	"github.com/0xEggTart/badger/y"
 	"github.com/dgraph-io/ristretto/v2/z"
 )
 
@@ -334,7 +333,7 @@ func (s *levelsController) dropPrefixes(prefixes [][]byte) error {
 		opt.Infof("Dropping prefix at level %d (%d tableGroups)", l.level, len(tableGroups))
 		for _, operation := range tableGroups {
 			cd := compactDef{
-		//		span:         span,
+				//		span:         span,
 				thisLevel:    l,
 				nextLevel:    l,
 				top:          nil,
@@ -1531,8 +1530,8 @@ func (s *levelsController) doCompact(id int, p compactionPriority) error {
 	//defer span.End()
 
 	cd := compactDef{
-		compactorId:  id,
-	//	span:         span,
+		compactorId: id,
+		//	span:         span,
 		p:            p,
 		t:            p.t,
 		thisLevel:    s.levels[l],

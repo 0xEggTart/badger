@@ -24,7 +24,7 @@ jobs:
           go-version-file: go.mod
       - name: Fetch latest Badger version
         run: |
-          go get github.com/dgraph-io/badger/v4@main
+          go get github.com/0xEggTart/badger/@main
       - name: Set up Node
         uses: actions/setup-node@v4
         with:

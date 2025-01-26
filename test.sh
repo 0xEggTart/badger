@@ -16,7 +16,7 @@ fi
 # Run `go list` BEFORE setting GOFLAGS so that the output is in the right
 # format for grep.
 # export packages because the test will run in a sub process.
-export packages=$(go list ./... | grep "github.com/dgraph-io/badger/v4/")
+export packages=$(go list ./... | grep "github.com/0xEggTart/badger/")
 
 tags="-tags=jemalloc"
 

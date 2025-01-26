@@ -27,10 +27,10 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/dgraph-io/badger/v4/options"
-	"github.com/dgraph-io/badger/v4/pb"
-	"github.com/dgraph-io/badger/v4/table"
-	"github.com/dgraph-io/badger/v4/y"
+	"github.com/0xEggTart/badger/options"
+	"github.com/0xEggTart/badger/pb"
+	"github.com/0xEggTart/badger/table"
+	"github.com/0xEggTart/badger/y"
 )
 
 // createAndOpen creates a table with the given data and adds it to the given level.
@@ -1227,10 +1227,10 @@ func TestFillTableCleanup(t *testing.T) {
 		cd := compactDef{
 			compactorId: 0,
 			//span:        nil,
-			p:           prio,
-			t:           prio.t,
-			thisLevel:   db.lc.levels[level-1],
-			nextLevel:   db.lc.levels[level],
+			p:         prio,
+			t:         prio.t,
+			thisLevel: db.lc.levels[level-1],
+			nextLevel: db.lc.levels[level],
 		}
 
 		// Fill tables passes first.

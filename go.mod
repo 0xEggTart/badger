@@ -1,4 +1,4 @@
-module github.com/dgraph-io/badger/v4
+module github.com/0xEggTart/badger
 
 go 1.22.0
 
@@ -31,7 +31,3 @@ require (
 	go.opentelemetry.io/otel/metric v1.34.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
-
-retract v4.0.0 // see #1888 and #1889
-
-retract v4.3.0 // see #2113 and #2121
